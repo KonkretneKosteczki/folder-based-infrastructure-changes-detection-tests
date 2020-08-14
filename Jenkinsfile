@@ -6,7 +6,7 @@ pipeline {
                 anyOf {
                     changeset pattern: "/B/**"
                     changeset pattern: "B/**"
-                    changeset pattern: "**"
+                    changeset pattern: "**/B/**"
                 }
             }
             steps {
