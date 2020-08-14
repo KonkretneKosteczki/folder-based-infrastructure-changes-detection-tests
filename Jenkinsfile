@@ -42,11 +42,11 @@ pipeline {
         stage('neither A nor B folder changes') {
             when {
                 not {
-                    changeset pattern: "(A|B)/**"
+                    changeset pattern: "+(A|B)/**"
                 }
             }
             steps {
-                echo 'Deploying A and B'
+                echo 'Deploying neither A nor B'
             }
         }
     }
