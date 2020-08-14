@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('AB trigger') {
             when {
-                branch 'master'
+                changeset pattern: "/{A,B}/**"
             }
             steps {
                 echo 'Deploying AB'
@@ -11,7 +11,6 @@ pipeline {
         }
         stage('A trigger') {
             when {
-                branch 'master'
                 changeset pattern: "/A/**"
             }
             steps {
@@ -20,7 +19,6 @@ pipeline {
         }
         stage('B trigger') {
             when {
-                branch 'master'
                 changeset pattern: "/B/**"
             }
             steps {
