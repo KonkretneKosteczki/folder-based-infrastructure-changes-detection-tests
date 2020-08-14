@@ -1,6 +1,14 @@
 pipeline {
     agent any
     stages {
+        stage('C folder changes') {
+            when {
+                changeset pattern: "B/**"
+            }
+            steps {
+                echo 'Deploying B'
+            }
+        }
         stage('B folder changes') {
             when {
                 changeset pattern: "B/**"
