@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('C folder changes') {
+        stage('A folder changes') {
             when {
-                changeset pattern: "B/**"
+                changeset pattern: "A/**"
             }
             steps {
-                echo 'Deploying B'
+                echo 'Deploying A'
             }
         }
         stage('B folder changes') {
@@ -15,14 +15,6 @@ pipeline {
             }
             steps {
                 echo 'Deploying B'
-            }
-        }
-        stage('A folder changes') {
-            when {
-                changeset pattern: "A/**"
-            }
-            steps {
-                echo 'Deploying A'
             }
         }
         stage('A or B folder changes') {
