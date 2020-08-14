@@ -1,20 +1,53 @@
 pipeline {
     agent any
     stages {
-        stage('/B trigger') {
-            when {
-                changeset pattern: "/B/**"
-            }
-            steps {
-                echo 'Deploying B'
-            }
-        }
-        stage('B trigger') {
+        stage('B folder changes') {
             when {
                 changeset pattern: "B/**"
             }
             steps {
                 echo 'Deploying B'
+            }
+        }
+        stage('A folder changes') {
+            when {
+                changeset pattern: "A/**"
+            }
+            steps {
+                echo 'Deploying A'
+            }
+        }
+        stage('A or B folder changes') {
+            when {
+                anyOf {
+                    changeset pattern: "A/**"
+                    changeset pattern: "B/**"
+                }
+            }
+            steps {
+                echo 'Deploying A or B'
+            }
+        }
+        stage('A and B folder changes') {
+            when {
+                allOf {
+                    changeset pattern: "A/**"
+                    changeset pattern: "B/**"
+                }
+            }
+            steps {
+                echo 'Deploying A and B'
+            }
+        }
+        stage('neither A nor B folder changes') {
+            when {
+                not {
+                    changeset pattern: "A/**"
+                    changeset pattern: "B/**"
+                }
+            }
+            steps {
+                echo 'Deploying A and B'
             }
         }
     }
