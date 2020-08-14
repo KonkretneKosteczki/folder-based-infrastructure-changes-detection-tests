@@ -42,7 +42,7 @@ pipeline {
         stage('neither A nor B folder changes') {
             when {
                 not {
-                    changeset pattern: "{A,B}/**"
+                    changeset pattern: "(A|B)/**"
                 }
             }
             steps {
